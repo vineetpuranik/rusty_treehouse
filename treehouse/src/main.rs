@@ -12,7 +12,9 @@ fn what_is_your_name() -> String {
         .expect("Failed to read user input");
 
     //return the name
-    your_name
+    //use trim to remove the \r\n in windows and \n in unix that gets added to the user input
+    //convert to lowercase to make it uniform case for matching
+    your_name.trim().to_lowercase()
 }
 
 fn main() {
@@ -24,5 +26,6 @@ fn main() {
     let name = what_is_your_name();
 
     //print users name
-    println!("Hello, {}", name);
+    //use {:?} placeholder to print detailed contents
+    println!("Hello , {:?}", name);
 }
