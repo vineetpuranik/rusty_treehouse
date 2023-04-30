@@ -26,7 +26,22 @@ fn main() {
     let name = what_is_your_name();
 
     //allowing only specified users to the treehouse
-    if name == "bert" || name == "steve" {
+    //use array to store the list of users allowed.
+    //array holds the list of values with 2 rules. Values must be same type and array cannot change size
+    //once you decide whom to admin, you cannot change the list without recompiling the program
+    let visitor_list = ["bert", "steve", "fred"];
+
+    //bool to capture if we have to allow the visitor to our treehouse
+    let mut allow_them_in = false;
+
+    //iterate over the visitor_list and check if the names match the name of the user input
+    for i in 0..visitor_list.len() {
+        if visitor_list[i] == name {
+            allow_them_in = true;
+        }
+    }
+
+    if allow_them_in == true {
         //print users name
         //use {:?} placeholder to print detailed contents
         println!("Hello , {:?}", name);
