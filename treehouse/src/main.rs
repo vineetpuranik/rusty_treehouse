@@ -25,7 +25,12 @@ fn main() {
     //invoke what_is_your_name
     let name = what_is_your_name();
 
-    //print users name
-    //use {:?} placeholder to print detailed contents
-    println!("Hello , {:?}", name);
+    //allowing only specified users to the treehouse
+    if name == "bert" || name == "steve" {
+        //print users name
+        //use {:?} placeholder to print detailed contents
+        println!("Hello , {:?}", name);
+    } else {
+        println!("Sorry, you are not on the list");
+    }
 }
