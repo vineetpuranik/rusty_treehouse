@@ -71,7 +71,7 @@ fn main() {
     //rust clippy  recommends using an iterator
     // for visitor in &visitor_list
     for visitor in &visitor_list {
-        if &visitor.name == &name {
+        if visitor.name == name {
             allow_them_in = true;
         }
     }
