@@ -35,13 +35,21 @@ fn main() {
     let mut allow_them_in = false;
 
     //iterate over the visitor_list and check if the names match the name of the user input
-    for i in 0..visitor_list.len() {
-        if visitor_list[i] == name {
+    //for i in 0..visitor_list.len() => Gives a warning with clippy
+    //the loop variable i is only used to index the array
+    //we could mess up i in the loop body and leave room for out of bound errors
+    //rust clippy  recommends using an iterator
+    // for visitor in &visitor_list
+    for visitor in &visitor_list {
+        if visitor == &name {
             allow_them_in = true;
         }
     }
 
-    if allow_them_in == true {
+    //if allow_them_in == true => equality checks against true are not neccesary
+    //clippy warning above
+    //remove unnecessary condition check
+    if allow_them_in {
         //print users name
         //use {:?} placeholder to print detailed contents
         println!("Hello , {:?}", name);
