@@ -61,29 +61,35 @@ fn main() {
         Visitor::new("fred", "Hello Fred, Who invited you ?"),
     ];
 
-    //bool to capture if we have to allow the visitor to our treehouse
-    let mut allow_them_in = false;
-
     //iterate over the visitor_list and check if the names match the name of the user input
     //for i in 0..visitor_list.len() => Gives a warning with clippy
     //the loop variable i is only used to index the array
     //we could mess up i in the loop body and leave room for out of bound errors
     //rust clippy  recommends using an iterator
     // for visitor in &visitor_list
-    for visitor in &visitor_list {
-        if visitor.name == name {
-            allow_them_in = true;
-        }
-    }
 
-    //if allow_them_in == true => equality checks against true are not neccesary
-    //clippy warning above
-    //remove unnecessary condition check
-    if allow_them_in {
-        //print users name
-        //use {:?} placeholder to print detailed contents
-        println!("Hello , {:?}", name);
-    } else {
-        println!("Sorry, you are not on the list");
+    //for visitor in &visitor_list {
+    //    if visitor.name == name {
+    //        allow_them_in = true;
+    //    }
+    //}
+
+    //Replace above for loop with Iterator implementation
+    //When working with lists of data, iterators are the first place to look at the functionality you need
+    //Iterators designed around function chaining
+    //Iterators include a find() function  to locate data within a collection wheter it is an Array, Vector ..
+
+    //assign the result of the iterator function chain to variable named known_visitor
+    //create an iterator with iter() that contains all the data from visitor_list
+    //find() runs a closure. If closure returns true, find() returns the matching value
+    let known_visitor = visitor_list.iter().find(|visitor| visitor.name == name);
+
+    //find() returns a Rust type called Option
+    //Options either contain a value or they don't
+    //Options have 2 possible values: Some(x) or None
+
+    match known_visitor {
+        Some(visitor) => visitor.greet_visitor(),
+        None => println!("You are not on the visitor list, please leave !!"),
     }
 }
