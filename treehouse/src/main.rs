@@ -1,5 +1,30 @@
 use std::io::stdin;
 
+//creating a struct for visitors
+struct Visitor {
+    name: String,
+    greeting: String,
+}
+
+//implement functions for a struct with impl and the struct name
+impl Visitor {
+    //associated function. The parameter list does not include self
+    //constructor returns type Self
+    //function takes parameters of type &str and stores values of type String
+    //this allows us to pass string literals to the constructor and not something like new (String::from("bert"))
+    fn new(name: &str, greeting: &str) -> Self {
+        Self {
+            name: name.to_lowercase(),
+            greeting: greeting.to_string(),
+        }
+    }
+    //membaer function as it accepts self as a parameter
+    //this is automatically passed in as a reference when you call the greet_visitor() function for the Struct instance
+    fn greet_visitor(&self) {
+        println!("{}", self.greeting);
+    }
+}
+
 //function to capture user name and return it
 fn what_is_your_name() -> String {
     //declare a mutable string to store the name of the user
@@ -29,7 +54,12 @@ fn main() {
     //use array to store the list of users allowed.
     //array holds the list of values with 2 rules. Values must be same type and array cannot change size
     //once you decide whom to admin, you cannot change the list without recompiling the program
-    let visitor_list = ["bert", "steve", "fred"];
+
+    let visitor_list = [
+        Visitor::new("bert", "Hello Bert, Enjoy your game"),
+        Visitor::new("steve", "Hello Steve, Your beer is in the fridge"),
+        Visitor::new("fred", "Hello Fred, Who invited you ?"),
+    ];
 
     //bool to capture if we have to allow the visitor to our treehouse
     let mut allow_them_in = false;
@@ -41,7 +71,7 @@ fn main() {
     //rust clippy  recommends using an iterator
     // for visitor in &visitor_list
     for visitor in &visitor_list {
-        if visitor == &name {
+        if &visitor.name == &name {
             allow_them_in = true;
         }
     }
